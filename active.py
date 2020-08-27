@@ -38,7 +38,6 @@ def run_timer(now):
     while(time.localtime().tm_hour<18):
         later=time.time()
         lap=round(later-now)
-        print(lap)
         time.sleep(1)
         if(lap%3600==0):
             print('drink water')
