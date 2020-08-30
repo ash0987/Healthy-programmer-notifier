@@ -34,31 +34,34 @@ def play_audio(audio):
             send_to_file(audio)
             break
 
-def run_timer(now):
-    while(time.localtime().tm_hour<18):
+def run_timer(intial):
+    intial_water=intial
+    intial_eye=intial
+    intial_phy=intial
+    while(True):
+        print('running')
         later=time.time()
-        lap=round(later-now)
-        time.sleep(1)
-        if(lap%3600==0):
+
+        if(later-intial_water>=3600):
             print('drink water')
             play_audio('water')
-        if(lap%1800==0):
+            intial_water=time.time()
+        if(later-intial_eye>=1800):
             print('for eyes')
             play_audio('eyes')
-        if(lap%2700==0):
+            intial_eye=time.time()
+        if(later-intial_phy>=2700):
             print('exercise')
             play_audio('exercise')
+            intial_phy=time.time()
+        time.sleep(1)
 
 
 
 
 def start_timer():
-    today=datetime(time.localtime().tm_year,time.localtime().tm_mon,time.localtime().tm_mday,9,0,0)
-    today=datetime.timestamp(today)
-
-    while(True):
-        if (time.time()>=today):
-            print('running')
-            run_timer(today)
-            break
+    intial=time.time()
+    
+    run_timer(intial)
+    
 start_timer()
